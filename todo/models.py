@@ -17,9 +17,6 @@ class Contact(Tag):
     email = models.EmailField(blank=False)
     created = models.DateTimeField(auto_now_add=True)
 
-    # def __str__(self):
-    #     return self.first_name
-
 class Label(Tag):
     pass
 
@@ -58,9 +55,9 @@ class Action(models.Model):
     state_choices = [
         ('inbox', 'Inbox'),
         ('next', 'Next'),
-        ('wait', 'Waiting'),
-        ('sched', 'Scheduled'),
-        ('smday', 'Someday')
+        ('waiting', 'Waiting'),
+        ('scheduled', 'Scheduled'),
+        ('someday', 'Someday')
     ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -74,7 +71,7 @@ class Action(models.Model):
     energy_required = models.CharField(
         max_length=2, choices=energy_level_choices, blank=True, default='no')
     due_date = models.DateField(blank=True, null=True)
-    state = models.CharField(max_length=5, choices=state_choices, blank=True, default='inbox')
+    state = models.CharField(max_length=10, choices=state_choices, blank=True, default='inbox')
     created = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
